@@ -1,0 +1,19 @@
+package Basics;
+
+public class Sqrt {
+	public static void main(String args[]){
+		double num = 16;
+		double ans = getSqrt(16);
+		System.out.println(ans);
+	}
+	
+	public static double getSqrt(double num){
+		double x = 1;
+		double y = 1;
+		while(Math.abs(x-y)<.000001){
+			y = x;
+			x = 0.5 *(x+(num/x));
+		}
+		return x;
+	}
+}

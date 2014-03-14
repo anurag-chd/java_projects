@@ -1,0 +1,85 @@
+import java.util.*;
+import java.io.*;
+public class BinaryTreeSerialisation {
+	static GenTreeNode root = new GenTreeNode('a');
+	public static void main(String args[]){
+		
+		root.setLeft_child(new GenTreeNode('b'));
+		root.setRight_child(new GenTreeNode('c'));
+		root.getLeft_child().setLeft_child(new GenTreeNode('d'));
+		root.getLeft_child().getLeft_child().setLeft_child(new GenTreeNode('e'));
+		root.getRight_child().setLeft_child(new GenTreeNode('f'));
+		BinaryTreeSerialisation btreeserial = new BinaryTreeSerialisation();
+		btreeserial.go();
+	}
+	
+	public void go(){
+		try{
+			File f = new File("SerialTree.txt");
+			FileOutputStream fs = new FileOutputStream(f);
+			ObjectOutputStream os = new ObjectOutputStream(fs);
+			sendObject(os, root);
+			os.close();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendObject(ObjectOutputStream os, GenTreeNode root){
+		
+		if(root!=null){
+			try{
+				os.writeObject(root);
+				System.out.println(root.getData());
+			}
+			catch(Exception e){
+				e.printStackTrace();
+				
+			}
+			
+			if(root.getLeft_child() == null && root.getRight_child() == null && (!root.getData().equals('#'))  ){
+				GenTreeNode leaf_node = new GenTreeNode('-');
+				try{
+					os.writeObject(leaf_node);
+					System.out.println(leaf_node.getData());
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}
+				
+			}
+			if(root.getLeft_child() == null && root.getRight_child() != null){
+				GenTreeNode leaf_node = new GenTreeNode('#');
+				root.setLeft_child(leaf_node);
+				/*try{
+					os.writeObject(leaf_node);
+					System.out.println(leaf_node.getData());
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}*/
+				
+			}
+			
+			if(root.getLeft_child() != null && root.getRight_child() == null){
+				GenTreeNode leaf_node = new GenTreeNode('#');
+				root.setRight_child(leaf_node);
+				/*try{
+					os.writeObject(leaf_node);
+					System.out.println(leaf_node.getData());
+				}
+				catch(Exception e){
+					e.printStackTrace();
+				}*/
+				
+			}
+			
+			
+			
+			sendObject(os, root.getLeft_child());
+			sendObject(os, root.getRight_child());
+		}
+	}
+
+}

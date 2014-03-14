@@ -1,0 +1,33 @@
+package DataStructure;
+
+public class Trie {
+	TrieNode root;
+	
+	public Trie(TrieNode root){
+		this.root = root;
+	}
+	
+	
+	public TrieNode addWord(String word){
+		TrieNode temp= null ;
+		TrieNode current = root;
+		//char c[] = word.toCharArray();
+		for(char c : word.toCharArray()){
+			if((temp =current.getChildNode(c)) != null ){
+				current = current.getChildNode(c);
+			}
+			else{
+				current.getChildren().add(new TrieNode(c));
+				current = current.getChildNode(c);
+			}
+			
+			
+			
+		}
+		current.setWord(true);
+		return root;
+		
+	}
+	
+
+}

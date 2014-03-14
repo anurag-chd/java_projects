@@ -1,0 +1,75 @@
+package AmazonInterview;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+import Basics.GenTreeNode;
+
+public class LowestCommonAncestor {
+	public static void main(String args[]){
+		GenTreeNode<Integer> root = new GenTreeNode<Integer>(5);
+		root.setLeft_child(new GenTreeNode(8));
+		root.setRight_child(new GenTreeNode(9));
+		root.getLeft_child().setLeft_child(new GenTreeNode(10));
+		root.getLeft_child().getLeft_child().setLeft_child(new GenTreeNode(2));
+		root.getLeft_child().getLeft_child().setRight_child(new GenTreeNode(1));
+		root.getRight_child().setLeft_child(new GenTreeNode(18));
+		root.getRight_child().setRight_child(new GenTreeNode(20));
+		
+		GenTreeNode<Integer> node1 = new GenTreeNode<Integer>(20);
+		GenTreeNode<Integer> node2 = new GenTreeNode<Integer>(2);
+		ArrayList<Integer> list1 = new ArrayList<Integer>();
+		list1 =	getPath(root, node1,list1);
+		for(int i : list1){
+			System.out.print(i+",");
+		}
+		
+		
+		
+		//GenTreeNode<Integer> parent = findLCA(root, node1, node2);
+	}
+	
+	/*public static GenTreeNode<Integer> findLCA(GenTreeNode<Integer> root, GenTreeNode<Integer> node1, GenTreeNode<Integer> node2){
+		ArrayList<Integer> list1 = new ArrayList<Integer>();
+		ArrayList<Integer> list2 = new ArrayList<Integer>();
+		list1 =	getPath(root, node1,list1);
+		list2 = getPath(root, node2, list2);
+	}*/
+	
+	
+	
+	public static ArrayList<Integer> getPath(GenTreeNode<Integer> root, GenTreeNode<Integer> node,ArrayList<Integer> list){
+		if(root == null){
+			list = null;
+			return list;
+		}
+		else{
+			if(root.getData() == node.getData()){
+				list.add(root.getData());
+				return list;
+			}
+			else{
+				list.add(root.getData());
+				
+				
+				list = getPath(root.getLeft_child(),node,list);
+				list = getPath(root.getRight_child(),node,list);
+				
+				
+				
+				return list;
+				/*list.add(list, getPath(root.getLeft_child(),node,list));
+				Collections.addAll(list, getPath(root.getLeft_child(),node,list));
+				*/
+			}
+			
+		}
+		
+		
+		
+	}
+	
+	
+	
+	
+}

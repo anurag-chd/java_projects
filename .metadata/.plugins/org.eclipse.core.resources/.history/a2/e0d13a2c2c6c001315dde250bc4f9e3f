@@ -1,0 +1,28 @@
+
+class BinaryST {
+	TreeNode root ;
+	
+	public BinaryST(){
+		root = null;
+	}
+
+	
+	public void insert(int data, TreeNode root){
+		TreeNode t = new TreeNode(data); 
+		TreeNode temp = root;
+		if (temp == null){
+			temp = t;
+		}
+		else{
+			if(data<=temp.getData()){
+				insert(data,temp.getLeft_child());
+			}
+			else{
+				insert(data,temp.getRight_child());
+			}
+			
+		}
+	}
+	
+	
+}

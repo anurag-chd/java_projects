@@ -1,0 +1,36 @@
+package Assignment1;
+
+import java.io.*;
+import java.util.*;
+public class MakeBigrams {
+	public static void main(String args[]){
+		File f= new File("C:/Users/Anurag/workspace/NLP/Test.txt");
+		HashMap<String,Integer> bigram_map = new HashMap<String,Integer>();
+		getBigram_Map(f,bigram_map);
+	}
+
+	public static void getBigram_Map(File f, HashMap<String,Integer> bigram_map) {
+		try{
+			Scanner sc=new Scanner(f);
+			sc.useDelimiter(" ");
+			String s;
+			String temp = sc.next();
+			while(sc.hasNext())
+			{
+			s=sc.next();
+			if(s.charAt(s.length()-1)== '.'){
+				s =s.substring(0, s.length()-1);
+			}
+			String s2 = temp+" "+s ;
+			temp = s;
+			System.out.println(s2);
+			//do whatever you want with s
+			}
+			
+		}
+		catch(FileNotFoundException e){
+			
+		}
+		 
+	}
+}

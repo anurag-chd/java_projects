@@ -1,0 +1,100 @@
+import java.util.*;
+public class Pre_In_Binary {
+	static GenTreeNode root = new GenTreeNode('a');
+	static ArrayList<GenTreeNode> inorder_list = new ArrayList<GenTreeNode>();
+	static ArrayList<GenTreeNode> preorder_list = new ArrayList<GenTreeNode>();
+	public static void main(String args[]){
+		Pre_In_Binary prein_bin = new Pre_In_Binary();
+		root.setLeft_child(new GenTreeNode('b'));
+		root.setRight_child(new GenTreeNode('c'));
+		root.getLeft_child().setLeft_child(new GenTreeNode('d'));
+	/*	root.getLeft_child().getLeft_child().setLeft_child(new GenTreeNode('e'));
+		root.getRight_child().setLeft_child(new GenTreeNode('f'));*/
+		prein_bin.convert_Binary_Inorder(root);
+		
+		prein_bin.convert_Binary_Preorder(root);
+		
+		for(GenTreeNode node:inorder_list){
+			System.out.println(node.getData());
+		}
+		System.out.println();
+		for(GenTreeNode node:preorder_list){
+			System.out.println(node.getData());
+		}
+		
+		GenTreeNode new_root = prein_bin.convert_Binary(inorder_list,preorder_list);
+		System.out.println("NEw Tree");
+		
+		prein_bin.print_Inorder(new_root);
+	}
+	
+	public void convert_Binary_Inorder(GenTreeNode root){
+		if(root!=null){
+			convert_Binary_Inorder(root.getLeft_child());
+			//System.out.println(root.getData());
+			this.inorder_list.add(root);
+			convert_Binary_Inorder(root.getRight_child());
+		}
+		
+	}
+	
+	public void print_Inorder(GenTreeNode root){
+		if(root!=null){
+			print_Inorder(root.getLeft_child());
+			System.out.println(root.getData());
+			
+			print_Inorder(root.getRight_child());
+		}
+		
+	}
+	public void convert_Binary_Preorder(GenTreeNode root){
+		if(root!=null){
+			preorder_list.add(root);
+			//System.out.println(root.getData());
+			convert_Binary_Preorder(root.getLeft_child());
+			convert_Binary_Preorder(root.getRight_child());
+		}
+	}
+	
+	public GenTreeNode convert_Binary(ArrayList<GenTreeNode> inorder_list,ArrayList<GenTreeNode> preorder_list){
+		if(inorder_list.size() == 1 && preorder_list.size() == 1){
+			GenTreeNode root= preorder_list.get(0);
+			return root;
+		}
+		if(inorder_list.size()>1 && preorder_list.size() >1){
+			GenTreeNode root= preorder_list.get(0);
+			int index = inorder_list.indexOf(root);
+			root.setLeft_child(preorder_list.get(1));
+			int right_child_index = preorder_list.indexOf(inorder_list.get(index-1)) +1;
+			root.setRight_child(preorder_list.get(right_child_index));
+			ArrayList<GenTreeNode> left_inorder_list= new ArrayList<GenTreeNode>();
+			ArrayList<GenTreeNode> left_preorder_list= new ArrayList<GenTreeNode>();
+			ArrayList<GenTreeNode> right_inorder_list= new ArrayList<GenTreeNode>();
+			ArrayList<GenTreeNode> right_preorder_list= new ArrayList<GenTreeNode>();
+			for(int i = 0; i<index;i++){
+				left_inorder_list.add(inorder_list.get(i));
+			}
+			for(int i = (index+1);i < inorder_list.size();i++){
+				right_inorder_list.add(inorder_list.get(i));
+			}
+			for(int i = 1; i<right_child_index;i++){
+				left_preorder_list.add(preorder_list.get(i));
+			}
+			for(int i = right_child_index; i<preorder_list.size();i++){
+				right_preorder_list.add(preorder_list.get(i));
+			}
+			root.setLeft_child(convert_Binary(left_inorder_list,left_preorder_list));
+			root.setRight_child(convert_Binary(right_inorder_list,right_preorder_list));
+			//convert_Binary(left_inorder_list,left_preorder_list);
+			//convert_Binary(right_inorder_list,right_preorder_list);
+			return root;
+		}
+		else {
+			return null;
+		}
+	}
+	
+
+}
+
+

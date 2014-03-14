@@ -1,0 +1,61 @@
+class Bnode{
+	int data;
+	Node left_child;
+	Node right_child;
+
+public Bnode(int num){
+	data = num;
+	
+}
+}
+
+
+public class BinaryTree {
+	
+	
+	public static void main(String args[]){
+		Bnode rootnode = new Bnode(25);
+		insertNode(rootnode, 12);
+		insertNode(rootnode,23);
+		insertNode(rootnode,27);
+		insertNode(rootnode,30);
+		printTree(rootnode);
+	}
+	
+
+
+public static void insertNode(Bnode rootnode,int num ){
+	Bnode leaf = new Bnode(num);
+	if(rootnode.data>leaf.data){
+		if(rootnode.left_child == null){
+			rootnode.left_child = leaf;
+		}
+		else{
+			insertNode(rootnode.left_child,num);
+		}
+		
+	}
+	else if(rootnode.data<leaf.data){
+		if(rootnode.right_child ==null){
+			rootnode.right_child = leaf;
+		}
+		else{
+			insertNode(rootnode.right_child,num);
+		}
+		
+	}
+	
+	
+}
+
+public static void printTree(Bnode rootnode){
+	if(rootnode!=null){
+		printTree(rootnode.left_child);
+		System.out.println(rootnode.data);
+		printTree(rootnode.right_child);
+	}
+}
+
+
+
+}

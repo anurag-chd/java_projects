@@ -1,0 +1,23 @@
+import java.io.*;
+import java.util.*;
+
+public class BinaryTreeDeserialisation {
+	
+	public static void main(String args[]){
+		BinaryTreeDeserialisation btreedeserial = new BinaryTreeDeserialisation();
+		btreedeserial.go();
+	}
+	
+	public void go(){
+		try{
+			File f = new File("SerialTree.ser");
+			FileInputStream fis = new FileInputStream(f);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+}

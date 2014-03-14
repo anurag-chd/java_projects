@@ -1,0 +1,39 @@
+package AmazonInterview;
+
+public class Fibonacci_Revise {
+	public static void main(String args[]){
+		int fib = 1000;
+		int num = 4;
+		getFib(fib);
+		//getSequence(fib,num);
+	}
+	
+	public static void getSequence(int fib,int num){
+		int len;
+		if(num > 3){
+			len = num;
+		}
+		else{
+			len = 3;
+		}
+		int arr[] = new int[len];
+		
+	}
+	
+	public static void getFib(int fib){
+		int arr[] = new int[fib];
+		arr[0] = 0;
+		arr[1] = 1;
+		//for(int i = 2;i<fib )
+		int i = 0;
+		while(fib>arr[i]){
+			i++;
+			if(i>1){
+				arr[i] = arr[i-1] +arr[i-2];
+			}
+		}
+		System.out.println(arr[i-1]);
+		
+	}
+
+}

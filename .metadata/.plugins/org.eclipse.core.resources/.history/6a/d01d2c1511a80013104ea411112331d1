@@ -1,0 +1,82 @@
+package Assignment1;
+
+import java.io.*;
+import java.util.*;
+import libsvm.*;
+public class Testsvm {
+	
+	public static final String POSITIVE_DOC_FOLDER = "C:\\Users\\user\\workspace\\NLP\\src\\txt_sentoken\\pos";
+	public static final String NEGATIVE_DOC_FOLDER = "C:\\Users\\user\\workspace\\NLP\\src\\txt_sentoken\\neg";
+
+	public static void main(String args[]){
+		File folder_pos = new File(POSITIVE_DOC_FOLDER);
+		Map<String,Integer> unigram_map_pos =  new HashMap<String,Integer>();
+		populate_unigram_map(folder_pos,0,999,unigram_map_pos);
+		
+	}
+	
+	
+	public static void populate_unigram_map(File folder,int start, int end,
+            Map<String,Integer> unigram_map){
+       
+       
+        File[] listOfFiles = folder.listFiles(file_filter(start,end));
+       
+        for(File file:listOfFiles){
+            getUnigramMap(file,unigram_map);
+        }
+       
+        /*       
+        for(String key:unigram_map.keySet()) {
+            if(unigram_map.get(key) != 1)
+            System.out.println(key + "  " + unigram_map.get(key));
+        }
+       
+        */
+       
+    }
+	
+	 public static FileFilter file_filter(final int num1, final int num2){
+	       
+	        FileFilter filter = new FileFilter() {
+	            @Override
+	            public boolean accept(File pathname) {
+	               
+	                int endIndex1 = pathname.toString().lastIndexOf("\\cv");
+	                int endIndex2 = pathname.toString().lastIndexOf("_");
+	                String filenumber = pathname.toString().substring(endIndex1 + 3,endIndex2);
+	               return  Integer.parseInt(filenumber) >= num1 && Integer.parseInt(filenumber) <= num2;
+	            }
+	         };
+	        
+	         return filter;
+	       
+	    }
+	
+	public static void getUnigramMap(File file, Map<String,Integer> list_unigrams){
+        Scanner input = null;
+        try {
+            input = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // storing the unigrams       
+        while(input.hasNext()) {
+            String nextLine = input.nextLine();
+            //System.out.println( nextLine );
+            for(String s: nextLine.split(" ")){
+                if(list_unigrams.containsKey(s))
+                    list_unigrams.put(s,list_unigrams.get(s) + 1);
+                else
+                    list_unigrams.put(s,1);
+            }           
+        }
+       
+
+        input.close();
+    }
+   
+	
+	
+}

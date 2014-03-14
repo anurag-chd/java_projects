@@ -1,0 +1,11 @@
+package DataStructure;
+
+public class TrieDriver {
+
+	public static void main(String args[]){
+		Trie triestruct = new Trie(new TrieNode(' '));
+		triestruct.addWord("Anurag");
+		//triestruct.addWord("Anubhav");
+		//triestruct.printTrie(triestruct.root);
+	}
+}

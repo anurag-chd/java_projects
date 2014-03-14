@@ -1,0 +1,42 @@
+import java.io.*;
+import java.util.*;
+
+public class TestPairClass {
+	public static void main(String args[]){
+		Pair<Month, Integer> p = new Pair<Month, Integer>(Month.Nov, 29);
+		System.out.println(p);
+	}
+
+}
+
+enum Month {Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec};
+
+class Pair<S,T>{
+	 S first;
+	 T second;
+	
+	public Pair(S first, T second){
+		this.first = first;
+		this.second = second;
+	}
+	
+	public void setFirst(S first){
+		this.first = first;
+	}
+	public S getFirst(){
+		return this.first;
+	}
+	
+	public void setSecond(T second){
+		this.second = second;
+	}
+	public T getSecond(){
+		return this.second;
+	}
+	
+	public String toString(){
+		String str = "The month is " +this.getFirst()+ " and the date is " +this.getSecond();
+		return str;
+	}
+}
+

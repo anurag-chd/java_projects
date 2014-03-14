@@ -1,0 +1,20 @@
+
+public class DfsBinary {
+	static GenTreeNode root = new GenTreeNode('a');
+	public static void main(String args[]){
+		DfsBinary dfs = new DfsBinary();
+		root.setLeft_child(new GenTreeNode('b'));
+		root.setRight_child(new GenTreeNode('c'));
+		root.getLeft_child().setLeft_child(new GenTreeNode('d'));
+		root.getLeft_child().getLeft_child().setLeft_child(new GenTreeNode('e'));
+		root.getRight_child().setLeft_child(new GenTreeNode('f'));
+		dfs.dfsTraverse(root);
+	}
+	
+	public void dfsTraverse(GenTreeNode root){
+		
+		 ;
+		
+	}
+	
+}

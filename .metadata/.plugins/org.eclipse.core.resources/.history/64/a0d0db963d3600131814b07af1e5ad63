@@ -1,0 +1,187 @@
+class Bnode{
+	int data;
+	Bnode left_child;
+	Bnode right_child;
+
+public Bnode(int num){
+	data = num;
+	
+}
+}
+
+
+public class BinaryTree {
+	
+	
+	public static void main(String args[]){
+		Bnode rootnode = new Bnode(25);
+		insertNode(rootnode, 12);
+		insertNode(rootnode,23);
+		insertNode(rootnode,27);
+		insertNode(rootnode,30);
+		printTree(rootnode);
+	}
+	
+
+
+public static void insertNode(Bnode rootnode,int num ){
+	Bnode leaf = new Bnode(num);
+	if(rootnode.data>leaf.data){
+		if(rootnode.left_child == null){
+			rootnode.left_child = leaf;
+		}
+		else{
+			insertNode(rootnode.left_child,num);
+		}
+		
+	}
+	else if(rootnode.data<leaf.data){
+		if(rootnode.right_child ==null){
+			rootnode.right_child = leaf;
+		}
+		else{
+			insertNode(rootnode.right_child,num);
+		}
+		
+	}
+	
+	
+}
+
+public static void printTree(Bnode rootnode){
+	if(rootnode!=null){
+		printTree(rootnode.left_child);
+		System.out.println(rootnode.data);
+		printTree(rootnode.right_child);
+	}
+}
+
+public static boolean delNode(Bnode rootnode,int data){
+	Bnode target = null;
+	Bnode parent = rootnode;
+	Bnode node = rootnode;
+	while (node!=null){
+		if(node.data == data){
+			target = node;
+			break;
+		}
+		if(node.data>data){
+			parent=node;
+			target=node.left_child;
+		}
+		else{
+			parent=node;
+			target=node.right_child;
+		}
+	}
+	
+	if(target == null){
+		return false;
+	}
+	boolean isleft;
+	if(target == parent.left_child){
+		isleft = true;
+	}
+	else{
+		isleft = false;
+	}
+	
+	
+	if(target == rootnode){
+		node = getLastNodeOnLeft(parent.right_child);
+		if(node != null){
+			node.left_child = parent.left_child;
+			node.right_child = parent.right_child;
+			rootnode = node;
+		}
+		
+		
+	}
+	else if(target.left_child == null && target.right_child == null){
+		if(isleft){
+			parent.left_child = null;
+			}
+		else{
+			parent.right_child = null;
+		}
+	}
+	
+	else if(target.left_child != null && target.right_child != null ){
+		if(isleft){
+			///////////////////////addition////////////////////////////
+			parent.left_child = target.right_child;
+			parent.left_child.left_child = target.left_child;
+		}
+		else{
+			///////////////////////////////addition//////////////////////////
+			parent.right_child = target.left_child;
+			parent.right_child.right_child = target.right_child;
+		}
+	}
+	
+	else if(target.left_child == null && target.right_child != null){
+		if(isleft){
+			parent.left_child = target.right_child;			
+		}
+		else{
+			parent.right_child = target.right_child;
+		}
+		 
+	}
+	else if(target.right_child == null && target.left_child != null){
+		if(isleft){
+			parent.left_child = target.left_child;
+		}
+		else{
+			parent.right_child = target.left_child ;
+		}
+	}
+	return true;
+}	
+	
+	/*if(rootnode.data == data){
+		Bnode temp = rootnode;
+		if(temp.left_child==null){
+			temp=temp.right_child;
+			if(temp.left_child==null){
+				rootnode=temp;
+				return rootnode;
+			}
+			else{
+				while(temp.left_child.left_child!=null){
+					temp=temp.left_child;
+				}
+				temp.left_child.right_child =rootnode.right_child;
+				rootnode=temp.left_child;
+				temp.left_child = null;
+				return rootnode;
+			}
+		}
+		else{
+			temp=temp.left_child;
+			if(temp.right_child==null){
+				temp.right_child = rootnode.right_child;
+				rootnode=temp;
+				return rootnode;
+			}
+			else{
+				while(temp.right_child.right_child!=null){
+					temp=temp.right_child;
+				}
+				temp.right_child.right_child =rootnode.right_child;
+				rootnode=temp.right_child;
+				temp.left_child = null;
+				return rootnode;
+			}
+			
+		}
+		
+		
+	}
+	else if(rootnode.data>data){
+		
+	}
+	*/
+	
+
+}

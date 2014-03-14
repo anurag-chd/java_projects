@@ -1,0 +1,161 @@
+package AmazonInterview;
+
+import Basics.GenTreeNode;
+import binaryTree.BinaryST;
+import binaryTree.TreeNode;
+
+public class CheckBinaryTree {
+	public static void main(String args[]){
+		BinaryST btree = new BinaryST(8);
+		btree.insert(6,btree.root);
+		btree.insert(10,btree.root);
+		btree.insert(5,btree.root);
+		btree.insert(7,btree.root);
+		btree.insert(9,btree.root);
+		btree.insert(11,btree.root);
+		
+		GenTreeNode<Integer> root = new GenTreeNode<Integer>(5);
+		root.setLeft_child(new GenTreeNode(8));
+		root.setRight_child(new GenTreeNode(9));
+		root.getLeft_child().setLeft_child(new GenTreeNode(10));
+		root.getLeft_child().getLeft_child().setLeft_child(new GenTreeNode(2));
+		root.getLeft_child().getLeft_child().setRight_child(new GenTreeNode(1));
+		root.getRight_child().setLeft_child(new GenTreeNode(8));
+		root.getRight_child().setRight_child(new GenTreeNode(10));
+		
+		if(check1(btree.root)){
+			System.out.println("BST");
+		}
+		else{
+			System.out.println("No BST");
+		}
+		if(check(root)){
+			System.out.println("BST");
+		}
+		else{
+			System.out.println("No BST");
+		}		
+	}
+	
+	
+	public static boolean check(GenTreeNode root){
+		if(root == null){
+			return true;
+		}
+
+	
+			return (check(root.getLeft_child()) && check(root.getRight_child()) 
+					&&
+					root.getLeft_child()!=null?(Integer)root.getData()>(Integer)root.getLeft_child().getData() : true
+					&& 
+					root.getRight_child()!=null?(Integer)root.getData()<(Integer)root.getRight_child().getData() : true
+					) ;
+		
+		
+		
+		
+		
+		
+		
+		
+		/*if(root == null){
+			return true;
+		}
+		else if(root.getLeft_child() == null && root.getRight_child() == null){
+			return true;
+			
+		}
+		else{
+			check(root.getLeft_child());
+			check(root.getRight_child());
+			if(root.getLeft_child() == null){
+				if((Integer)root.getData() < (Integer)root.getRight_child().getData()){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			else if(root.getRight_child() == null){
+				if((Integer)root.getData() >= (Integer)root.getLeft_child().getData()){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			else{
+				if((Integer)root.getData() >= (Integer)root.getLeft_child().getData() && (Integer)root.getData() < (Integer)root.getRight_child().getData()){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			
+			
+			
+		}*/
+	}
+	
+	public static boolean check1(TreeNode root){
+		
+		if(root == null){
+			return true;
+		}
+		else if (root.getLeft_child() == null && root.getRight_child() == null){
+			return true;
+		}
+		else{
+			return (check1(root.getLeft_child()) && check1(root.getRight_child()) 
+					&& (Integer)root.getData()>(Integer)root.getLeft_child().getData()
+					&& (Integer)root.getData()<(Integer)root.getRight_child().getData()
+					) ;
+		}
+		
+		/*
+		if(root == null){
+			return false;
+		}
+		else if(root.getLeft_child() == null && root.getRight_child() == null){
+			return true;
+			
+		}
+		else{
+			check1(root.getLeft_child());
+			check1(root.getRight_child());
+			if(root.getLeft_child() == null){
+				if((Integer)root.getData() < (Integer)root.getRight_child().getData()){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			else if(root.getRight_child() == null){
+				if((Integer)root.getData() >= (Integer)root.getLeft_child().getData()){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			else{
+				if((Integer)root.getData() >= (Integer)root.getLeft_child().getData() && (Integer)root.getData() < (Integer)root.getRight_child().getData()){
+					return true;
+				}
+				else{
+					return false;
+				}
+			}
+			
+			
+			
+		}
+*/	}
+
+	
+	
+	
+	
+}

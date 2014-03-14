@@ -1,0 +1,40 @@
+package AmazonInterview;
+
+public class Shift_zeros {
+	public static void main(String args[]){
+		int arr[] = {1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0};
+		shiftArr(arr);
+		
+	}
+	public static void shiftArr(int arr[]){
+		int len = arr.length;
+		int i;
+		int count =0;
+		for(i =0; i< len;i++){
+			if(count== len){
+				break;
+			}
+			for(int j =count;j<len;j++){
+				if(arr[j]!= 0){
+					arr[i]= arr[j];
+					//System.out.println(arr[i]+""+i);
+					count++;
+					break;
+				}
+				else{
+					count++;
+				}
+					
+			}
+		}
+		System.out.println(i);
+		
+		while(i<len){
+			arr[i] = 0;
+			i++;
+		}
+		for(int k : arr){
+			System.out.print(arr[k]+",");
+		}
+	}
+}

@@ -1,0 +1,52 @@
+import visidia.simulation.process.algorithm.Algorithm;
+import visidia.simulation.process.edgestate.MarkedState;
+import visidia.simulation.process.messages.IntegerMessage;
+import visidia.simulation.process.messages.Message;
+import visidia.simulation.process.messages.StringMessage;
+
+import visidia.simulation.*;
+import visidia.misc.*;
+import java.util.*;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Random;
+import java.util.Vector;
+
+public class MyNewAlgo extends Algorithm {
+	static int count=0;
+	@Override
+	public Object clone() {
+	return new MyNewAlgo();
+	}
+	@Override
+	public void init() {
+	//java.util.Random r = new java.util.Random();
+	int nbNeighbors = getArity();
+	while (true) {
+		// Randomly select a neighbor
+		int neighborDoor = nbNeighbors;
+		// Send synchronization messages (0 and 1)
+		//for (int i = 0; i < nbNeighbors; ++i)
+		if (count == 0){
+		String str = "Hi";
+		Message msg = new StringMessage(str);
+		sendTo(neighborDoor, msg);
+		count++;
+		}// Receive a message
+		boolean rendezVousAccepted = false;
+		//for (int i = 0; i < nbNeighbors; ++i) {
+		StringMessage msg1 = (StringMessage) receiveFrom(neighborDoor);
+		if (msg1.data().equals("Hi")){
+		rendezVousAccepted = true;
+		}
+		// Mark an edge and send a "Hello" message
+		if (rendezVousAccepted == true) {
+		setDoorState(new MarkedState(true), neighborDoor);
+		sendTo(neighborDoor, new StringMessage("Hello"));
+		receiveFrom(neighborDoor);
+		setDoorState(new MarkedState(false), neighborDoor);
+		}
+		}
+		}
+
+}

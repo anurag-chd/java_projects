@@ -1,0 +1,23 @@
+package Basics;
+
+public class Test {
+	void m1(){
+		System.out.println("A");
+		
+	}
+	
+	public static void main(String args[]){
+		Test a = new Test2();
+		((Test2) a).m2();
+	}
+}
+
+class Test2 extends Test{
+	 void m1(){
+		System.out.println("B");
+	}
+	 
+	 void m2(){
+		 System.out.println("c");
+	 }
+}

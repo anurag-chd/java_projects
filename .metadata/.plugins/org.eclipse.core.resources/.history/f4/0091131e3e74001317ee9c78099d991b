@@ -1,0 +1,26 @@
+import java.io.*;
+import java.util.*;
+
+public class BinaryTreeDeserialisation {
+	
+	public static void main(String args[]){
+		BinaryTreeDeserialisation btreedeserial = new BinaryTreeDeserialisation();
+		btreedeserial.go();
+	}
+	
+	public void go(){
+		try{
+			File f = new File("SerialTree.txt");
+			FileInputStream fis = new FileInputStream(f);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			ArrayList<GenTreeNode> btree_list= (ArrayList<GenTreeNode>)ois.readObject();
+			GenTreeNode[] btree_arr = (GenTreeNode[])btree_list.toArray();
+			System.out.println(btree_arr[0].getData());
+		
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+}

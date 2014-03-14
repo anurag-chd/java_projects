@@ -1,0 +1,36 @@
+package Basics;
+
+public class Sqrt {
+	public static void main(String args[]){
+		int num = 16;
+		int ans = getSqrt(32,0 ,32);
+		System.out.println(ans);
+	}
+	
+	public static int getSqrt(int num, int start, int end){
+		/*double x = 1;
+		double y = 1;
+		while(Math.abs(x-y)<.000001){
+			y = x;
+			x = 0.5 *(x+(num/x));
+		}*/
+		//return x;
+		if (start > end){
+			return -1;
+		}
+		int middle = (start + end)/2;
+		if(middle*middle == num){
+			return middle;
+		}
+		else{
+			if(middle*middle < num){
+				middle = getSqrt(num, middle+1, end);
+			}
+			else{
+				middle = getSqrt(num, start, middle);
+			}
+		return middle;	
+		}
+		
+	}
+}

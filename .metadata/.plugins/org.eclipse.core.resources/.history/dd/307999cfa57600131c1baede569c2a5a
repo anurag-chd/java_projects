@@ -1,0 +1,22 @@
+import java.io.*;
+import java.util.*;
+
+public class TestPairClass {
+	public static void main(String args[]){
+		
+	}
+
+}
+
+enum Month {Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec};
+
+class Pair<S,T>{
+	private S month;
+	private T date;
+	
+	public Pair(S month, T date){
+		month = month;
+		date = date;
+	}
+}
+

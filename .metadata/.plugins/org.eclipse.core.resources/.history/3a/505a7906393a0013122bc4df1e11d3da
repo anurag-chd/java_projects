@@ -1,0 +1,216 @@
+class Bnode{
+	int data;
+	Bnode left_child;
+	Bnode right_child;
+
+	public Bnode(int num){
+		data = num;
+
+	}
+}
+
+
+public class BinaryTree {
+	//public static Bnode rootnode = new Bnode(25);
+
+	public static void main(String args[]){
+		Bnode rootnode = new Bnode(8);
+		insertNode(rootnode, 4);
+		insertNode(rootnode,13);
+		insertNode(rootnode,9);
+		insertNode(rootnode,15);
+		insertNode(rootnode,14);
+		insertNode(rootnode,2);
+		insertNode(rootnode,12);
+		insertNode(rootnode,5);
+		insertNode(rootnode,1);
+		insertNode(rootnode,6);
+		insertNode(rootnode,3);
+		insertNode(rootnode,10);
+		insertNode(rootnode,11);
+		insertNode(rootnode,7);
+		pruneList(rootnode, 45);
+		printTree(rootnode);
+
+		//delNode(rootnode,null,25);
+		//System.out.println("Root node" +rootnode.data);
+		//delNode(rootnode,34);
+		//insertNode(rootnode,18);
+		//printTree(rootnode); 
+	}
+
+
+
+	public static void insertNode(Bnode rootnode,int num ){
+		Bnode leaf = new Bnode(num);
+		if(rootnode.data>leaf.data){
+			if(rootnode.left_child == null){
+				rootnode.left_child = leaf;
+			}
+			else{
+				insertNode(rootnode.left_child,num);
+			}
+
+		}
+		else if(rootnode.data<leaf.data){
+			if(rootnode.right_child ==null){
+				rootnode.right_child = leaf;
+			}
+			else{
+				insertNode(rootnode.right_child,num);
+			}
+
+		}
+
+
+	}
+
+	public static void printTree(Bnode rootnode){
+
+		if(rootnode!=null){
+			printTree(rootnode.left_child);
+			System.out.println(rootnode.data+"->");
+			printTree(rootnode.right_child);
+		}
+		//System.out.println("Root Node ===== "+rootnode.data);
+	}
+
+
+	/*private static Bnode remove(Bnode node, int data)
+{
+  if(node == null)
+  {
+    System.out.println("ERROR: Number does not exist");
+    return null;
+  }
+
+  if(data == node.data)
+  {
+    if(node.left_child == null)
+    {
+      return node.right_child;
+    }
+    else if(node.right_child == null)
+    {
+      return node.left_child;
+    }
+    else //both the children exists
+    {
+      Bnode successor = getSuccessorNode(node.left_child);
+      node.data = successor.data;
+      node.left_child = remove(node.left_child, successor.data);
+    }
+  }
+  else if(data < node.data)
+  {
+    node.left_child = remove(node.left_child, data);
+  }
+  else
+  {
+    node.right_child = remove(node.right_child, data);
+  }
+
+  return node;
+}
+
+private static Bnode getSuccessorNode(Bnode node)
+{
+  while(node.right_child != null)
+  {
+    node = node.right_child;
+  }
+  return node;
+}
+
+
+	 */
+
+	public static void delNode(Bnode node,Bnode parent, int val){
+		if (node == null){
+			return;
+		}
+		else if (node != null){
+			if (node.data == val){
+				if(node.left_child == null && node.right_child == null){
+					if(parent.left_child.data == val){
+						parent.left_child = null;
+					}
+					else{
+						parent.right_child = null;
+
+					}
+				}
+
+				else if (node.left_child == null && node.right_child != null){
+					if (parent.left_child.data == val){
+						parent.left_child = node.right_child;
+					}
+					else
+						parent.right_child = node.right_child;
+				}
+
+				else if (node.right_child == null &&node.left_child != null){
+					if (parent.left_child.data == val){
+						parent.left_child = node.left_child;
+					}
+					else
+						parent.right_child = node.left_child; 
+				}
+
+				else if (node.right_child != null && node.left_child != null){
+					parent = node;
+					Bnode temp = node;
+					node = node.left_child;
+					while(node.right_child != null){
+						parent = node;
+						node = node.right_child;
+					}
+					temp.data = node.data ;
+					delNode(node,parent,node.data);
+				}
+
+
+			}
+			if (node.data > val)
+				delNode(node.left_child,parent,val);
+			else if (node.data < val)
+				delNode(node.right_child,parent,val);
+
+		}
+	}
+
+	public static void pruneList(Bnode rootnode, int k){
+		int sum = 0;
+		Bnode node = add_sum(rootnode, k,sum);
+
+	}
+	public static Bnode add_sum(Bnode rootnode, int k, int sum){
+		sum = sum + rootnode.data;
+		//k = k - sum;
+		if (sum > k){
+			return rootnode;
+		}
+		else if(sum<k && rootnode.left_child == null && rootnode.right_child == null){
+			return null;
+		}
+		/*else if(sum < k && rootnode.left_child != null){
+			rootnode.left_child =add_sum(rootnode.left_child,k,sum);
+		}*/
+		else if(sum < k && (rootnode.left_child != null || rootnode.right_child != null) ){
+			rootnode.left_child =add_sum(rootnode.left_child,k,sum);
+			rootnode.right_child=add_sum(rootnode.right_child,k,sum);
+		}
+		/*else if(sum < k && rootnode.right_child == null){
+			return null;
+		}*/
+		/*else if(sum < k && rootnode.right_child != null){
+			rootnode.right_child=add_sum(rootnode.right_child,k,sum);
+		}*/
+		return rootnode;
+	}
+
+
+
+
+
+}

@@ -1,0 +1,62 @@
+import java.io.*;
+
+import org.omg.CORBA.ExceptionList;
+class TestSerialization {
+	public static void main(String args[]){
+		Ts2 tester = new Ts2(21,23);
+		FileOutputStream fs;
+		ObjectOutputStream os;
+		try{
+		fs = new FileOutputStream("Serialisation.txt");
+		os = new ObjectOutputStream(fs);
+		os.writeObject(tester);
+		os .close();
+		}
+		catch(FileNotFoundException fe){
+			
+		}
+		catch(IOException ie){
+			
+		}
+		finally{
+//		fs.close();
+	//	os.close();
+		}
+		try{
+		FileInputStream fis = new FileInputStream("Serialisation.txt");
+		ObjectInputStream ois = new ObjectInputStream(fis);
+		Object one = ois.readObject();
+		ois.close();
+		Ts2 new_ts = (Ts2)one;
+		System.out.println(new_ts.s1);
+		}
+		catch(FileNotFoundException e){
+			System.out.println("Error");
+			
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+}
+class Ts1 {
+int s1;
+	public Ts1(){
+		s1 = 69;
+		
+	}
+	public Ts1(int s){
+		s1= s;
+		System.out.println("First Class");
+	}
+
+}
+
+class Ts2 extends Ts1 implements Serializable {
+int s2;
+public Ts2(int s1, int s2){
+	super(s1);
+	System.out.println("Second class");
+	s2 = s1;
+}
+}

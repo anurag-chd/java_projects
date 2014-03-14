@@ -1,0 +1,69 @@
+package sorting;
+
+public class QuickSort2 {
+	public static void main(String args[]){
+		//int arr[] = {20,30,5,6,6};
+		int arr[] = {4,5,6,7,1,2,3};
+		sort(arr,0,arr.length-1);
+		for(int i :arr){
+			System.out.print(i+",");
+		}
+	}
+	
+	public static void sort(int []arr, int start, int end){
+		if(start>end){
+			return;
+		}
+		else{
+			int left = start;
+			int right = end;
+			int pivot = arr[start];
+			while(right>left){
+				while(arr[left]<= pivot && right>=left)
+					left++;
+				while(arr[right]> pivot && right>=left)
+					right--;
+				if(right>=left){
+					swap(arr, left, right);
+				}
+			}
+			
+			swap(arr, start, right);
+			sort(arr,start,right-1);
+			sort(arr,right+1,end);
+		}
+		
+		
+	}
+	
+	public static void swap(int arr[],int lower, int higher){
+		int temp = arr[lower];
+		arr[lower] = arr[higher];
+		arr[higher] = temp;
+	}
+	
+	
+}
+/*private static void quickSort(Integer[] input_array, Integer start, Integer end) { 
+	//int len = end-start; 
+	if( start > end) return;
+	if(len == 1) {
+	 *  if (input_array[start] > input_array[end])
+	 *   swap(input_array,start,end); return;
+	 *    } 
+	Integer left = start,right = end;
+	Integer pivot = input_array[start];
+	while(right>left){
+		while(left <= end && input_array[left] <= pivot )
+			left++;
+		while(right >= start && input_array[right] > pivot )
+			right--; 
+		if(right>=left) 
+			swap(input_array,left,right); 
+		}
+	swap(input_array,start,right); 
+	quickSort(input_array,start,right-1); 
+	quickSort(input_array,right+1,end); 
+	return; 
+	}
+}*/

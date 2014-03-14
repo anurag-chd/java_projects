@@ -1,0 +1,33 @@
+package AmazonInterview;
+
+public class Min_Sorted_Rotated {
+	public static void main(String args[]){
+		int arr[] = {1, 2, 3, 4,5,6};
+		search(arr,0,arr.length-1);
+	}
+	public static void search(int arr[], int start, int end){
+		if(start>end){
+			System.out.println(arr[0]);
+			return;
+		}
+		if(start == end){
+			System.out.println(arr[start]);
+			return;
+		}
+		else{
+		int mid = (start+end)/2;
+		if(arr[mid]<arr[mid-1]){
+			System.out.println(arr[mid]);
+		}
+		else{
+			if(arr[mid]>arr[end]){
+				search(arr,mid+1,end);
+			}
+			else{
+				search(arr,start,mid-1);
+			}
+		}
+			
+		}
+	}
+}

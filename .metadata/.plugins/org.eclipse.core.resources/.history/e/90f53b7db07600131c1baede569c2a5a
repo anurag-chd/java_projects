@@ -1,0 +1,54 @@
+import java.io.*;
+import java.util.*;
+
+public class TestPairClass {
+	public static void main(String args[]){
+		Pair<Month, Integer> p = new Pair<Month, Integer>(Month.Nov, 29);
+		System.out.println(p);
+		TestPairClass tpc = new TestPairClass();
+		String [] a = new String[]{"Jab","Mila","Tu"};
+		tpc.print(a);
+		Integer [] b =new Integer[]{1,2,3,4};
+		tpc.print(b);
+	}
+	
+	public <S> void print(S[] a){
+		for(S i: a){
+			System.out.printf("%s",i);
+		}
+		System.out.println(" ");
+	}
+
+}
+
+enum Month {Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec};
+
+class Pair<S,T>{
+	 private S first;
+	 private T second;
+	
+	public Pair(S first, T second){
+		this.first = first;
+		this.second = second;
+	}
+	
+	public void setFirst(S first){
+		this.first = first;
+	}
+	public S getFirst(){
+		return this.first;
+	}
+	
+	public void setSecond(T second){
+		this.second = second;
+	}
+	public T getSecond(){
+		return this.second;
+	}
+	
+	public String toString(){
+		String str = "The month is " +this.getFirst()+ " and the date is " +this.getSecond();
+		return str;
+	}
+}
+

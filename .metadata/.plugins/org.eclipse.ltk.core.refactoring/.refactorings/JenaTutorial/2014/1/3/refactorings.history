@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;JenaTutorial/src/jena-log4j.properties&apos; to &apos;log4j.properties&apos;" description="Rename resource &apos;jena-log4j.properties&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/jena-log4j.properties" name="log4j.properties" stamp="1389792568765" updateReferences="true"/>
+</session>

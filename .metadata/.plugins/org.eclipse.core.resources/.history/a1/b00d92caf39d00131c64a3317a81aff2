@@ -1,0 +1,33 @@
+package AmazonInterview;
+
+public class Arr_Elem_n_k {
+	public static void main(String args[]){
+		int arr[] = {3, 1, 2, 2, 1, 2, 3, 3};
+		int k = 4;
+		sort(arr,0,arr.length-1 );
+	}
+	
+	
+	public static void sort(int arr[],int start, int end){
+		if(start>end){
+			return;
+		}
+		else{
+			int left = start;
+			int right = end;
+			int pivot = arr[left];
+			while(left>right){
+				while(arr[left]<=pivot && left<=right)
+					left++;
+				while(arr[right]>pivot && left<=right)
+					right--;
+				if(left>right){
+					swap(arr,left,right);
+				}
+				
+			}
+			swap(arr,pivot,right);
+		}
+	}
+
+}

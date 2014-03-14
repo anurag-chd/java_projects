@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="twitterSentimentMining/src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Anurag/Downloads/twitter4j-3.0.4/lib/twitter4j-async-3.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Anurag/Downloads/twitter4j-3.0.4/lib/twitter4j-core-3.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Anurag/Downloads/twitter4j-3.0.4/lib/twitter4j-examples-3.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Anurag/Downloads/twitter4j-3.0.4/lib/twitter4j-media-support-3.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Anurag/Downloads/twitter4j-3.0.4/lib/twitter4j-stream-3.0.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Anurag/Downloads/dom4j-2.0.0-ALPHA-2-sources.jar"/>
+	<classpathentry kind="output" path="twitterSentimentMining/bin"/>
+</classpath>

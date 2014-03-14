@@ -1,0 +1,104 @@
+package AmazonInterview;
+
+import binaryTree.*;
+
+public class ConvertBalancedBST {
+	public static void main(String args[]){
+		BinaryST btree = new BinaryST();
+		for(int i = 1 ; i<=4 ;i++){
+			btree.root = btree.insert(i, btree.root);
+		}
+		System.out.println(btree.root.getData());
+		
+		if(btree.root.getLeft_child() == null)
+			btree.root = convertBST(btree.root,true);
+		
+		else
+			btree.root =convertBST(btree.root,false);
+		System.out.println(btree.root.getData());
+	}
+	
+	public static TreeNode convertBST(TreeNode root,boolean asc){
+		if(root == null){
+			return null;
+		}
+		else{
+			if(isBalanced(root)){
+				return root;
+			}
+			else{
+				if(asc){
+					TreeNode temp = root;
+					temp = temp.getRight_child();
+					while(temp.getLeft_child()!=null){
+						temp = temp.getLeft_child();
+					}
+					temp.setLeft_child(root);
+					if(temp != root.getRight_child()){
+						temp.setRight_child(root.getRight_child());
+					}
+					
+					//root.setRight_child(temp.getRight_child());
+					System.out.println(temp.getRight_child().getData());
+					root = temp;
+					System.out.println(root.getRight_child().getData());
+					return convertBST(root, true);
+				}
+				else{
+					TreeNode temp = root;
+					temp = temp.getLeft_child();
+					while(temp.getRight_child()!=null){
+						temp = temp.getRight_child();
+					}
+					temp.setRight_child(root);
+					if(temp != root.getLeft_child()){
+						temp.setLeft_child(root.getLeft_child());
+					}
+					else{
+						root.setRight_child(temp.getRight_child());
+					}
+					root = temp;
+					return convertBST(root, false);
+					
+				}
+			}
+		}
+	}
+	
+	public static boolean isBalanced(TreeNode root){
+		if(root == null){
+			return true;
+		}
+		else{
+			//System.out.println(maxHeight(root));
+			//System.out.println(minHeight(root));
+			if(maxHeight(root)- minHeight(root) <=1){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+	}
+	
+	public static int maxHeight(TreeNode root){
+		if(root == null){
+			return 0;
+		}
+		else{
+			//System.out.println(1 +Math.max(maxHeight(root.getLeft_child()), maxHeight(root.getRight_child() ) ) );
+			return (1 +Math.max(maxHeight(root.getLeft_child()), maxHeight(root.getRight_child() ) ) );
+		}
+	}
+	
+	public static int minHeight(TreeNode root){
+		if(root == null){
+			return 0;
+		}
+		else{
+			return (1 +Math.min(minHeight(root.getLeft_child()), minHeight(root.getRight_child() ) ) );
+		}
+	}
+	
+	
+}

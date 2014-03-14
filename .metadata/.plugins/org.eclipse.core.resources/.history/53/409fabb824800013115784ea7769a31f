@@ -1,0 +1,58 @@
+package DataStructure;
+import java.util.*;
+public class Trie {
+	TrieNode root;
+	
+	public Trie(TrieNode root){
+		this.root = root;
+	}
+	
+	
+	public TrieNode addWord(String word){
+		TrieNode temp= null ;
+		TrieNode current = root;
+		//char c[] = word.toCharArray();
+		for(char c : word.toCharArray()){
+			if((temp =current.getChildNode(c)) != null ){
+				current = current.getChildNode(c);
+			}
+			else{
+				current.getChildren().add(new TrieNode(c));
+				System.out.println(current.getC());
+				current = current.getChildNode(c);
+				System.out.println(current.getC());
+			}
+			
+			
+			
+		}
+		current.setWord(true);
+		return root;
+		
+	}
+	
+	public void printTrie(TrieNode root){
+		TrieNode current = root;
+		Stack<TrieNode> stack = new Stack<TrieNode>();
+		StringBuilder sb = new StringBuilder();
+		stack.push(current);
+		while(!stack.empty()){
+			TrieNode temp = stack.pop();
+			sb = sb.append(temp.getC());
+			if(temp.isWord()){
+				System.out.println(sb);
+			}
+			for(int i = 0; i<temp.getChildren().size();i++){
+				if(temp.getChildren().get(i) != null ){
+					stack.push(temp);
+				}
+			}
+		}
+		
+		
+		
+				
+	}
+	
+
+}

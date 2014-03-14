@@ -1,0 +1,42 @@
+package PracticeQues;
+
+import java.io.Serializable;
+
+
+class GenTreeNode<E> implements Serializable {
+	private E data;
+	private GenTreeNode<E> left_child;
+	private GenTreeNode<E> right_child;
+	
+	public GenTreeNode(E data){
+		this.data = data;
+	}
+
+	public E getData() {
+		return data;
+	}
+
+	public void setData(E data) {
+		this.data = data;
+	}
+
+	public GenTreeNode<E> getLeft_child() {
+		return left_child;
+	}
+
+	public void setLeft_child(GenTreeNode<E> left_child) {
+		this.left_child = left_child;
+	}
+
+	public GenTreeNode<E> getRight_child() {
+		return right_child;
+	}
+
+	public void setRight_child(GenTreeNode<E> right_child) {
+		this.right_child = right_child;
+	}
+	
+
+
+
+}

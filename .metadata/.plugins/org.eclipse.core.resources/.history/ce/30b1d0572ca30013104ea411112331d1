@@ -1,0 +1,13 @@
+package Nomura;
+
+import java.util.*;
+public class TestHash {
+	public static void main(String args[]){
+		Hashtable<Integer,String> tab = new Hashtable<Integer,String>();
+		tab.put(1,"Anurag");
+		tab.put(1, "Mrinal");
+		
+		System.out.println(tab.get(1));
+	}
+
+}
